@@ -15,7 +15,7 @@ namespace TrackMyWalks
         {
             Title = "Szlak";
 
-            BindingContext = new WalksTrailViewModel(walkItem);
+            BindingContext = new WalkTrailViewModel(walkItem);
 
             var beginTrailWalk = new Button
             {
