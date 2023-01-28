@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TrackMyWalks.Models;
 using Xamarin.Forms;
+using TrackMyWalks.ViewModels;
 
 namespace TrackMyWalks
 {
@@ -50,6 +51,8 @@ namespace TrackMyWalks
                 ImageUrl = "https://ourlittleadventures.pl/wp-content/uploads/2019/07/mapatrasaWawa.png"
                 },
             };
+            BindingContext = new WalkPageViewModel();
+
             var itemTemplate = new DataTemplate(typeof(ImageCell));
             itemTemplate.SetBinding(TextCell.TextProperty, "Title");
             itemTemplate.SetBinding(TextCell.DetailProperty, "Notes");
@@ -62,6 +65,15 @@ namespace TrackMyWalks
                 ItemsSource = walkItems,
                 SeparatorColor = Color.FromHex("#ddd"),
             };
+
+            var walkList = new ListView
+            {
+                HasUnevenRows = true,
+                ItemTemplate = itemTemplate,
+                SeparatorColor = Color.FromHex("#ddd"),
+            };
+            walkList.SetBinding(ItemsView<Cell>.ItemsSourceProperty, "walkEntries");
+
             walksList.ItemTapped += (object sender, ItemTappedEventArgs e) =>
             {
                 var item = (WalkEntries)e.Item;
