@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 using TrackMyWalks.Models;
+using TrackMyWalks.ViewModels;
 using Xamarin.Forms.Maps;
 
 namespace TrackMyWalks
@@ -13,7 +14,9 @@ namespace TrackMyWalks
         public WalkTrailPage(WalkEntries walkItem)
         {
             Title = "Szlak";
-        
+
+            BindingContext = new WalksTrailViewModel(walkItem);
+
             var beginTrailWalk = new Button
             {
                 BackgroundColor = Color.FromHex("#008080"),
@@ -35,6 +38,8 @@ namespace TrackMyWalks
                 Source = walkItem.ImageUrl
             };
 
+            walkTrailImage.SetBinding(Image.TabIndexProperty, "WalkEntry.ImageUrl");
+
             var trailNameLabel = new Label()
             {
                 FontSize = 28,
@@ -42,6 +47,7 @@ namespace TrackMyWalks
                 TextColor = Color.Black,
                 Text = walkItem.Title
             };
+            trailNameLabel.SetBinding(Label.TextProperty, "WalkEntry.Title");
 
             var trailKilometersLabel = new Label()
             {
@@ -51,6 +57,7 @@ namespace TrackMyWalks
                 Text = $"Długość: {walkItem.Kilometers} km"
 
             };
+            trailKilometersLabel.SetBinding(Label.TextProperty, "WalkEntry.Kilometers", stringFormat: "Długość {0} km");
 
             var trailDifficultyLabel = new Label()
             {
@@ -59,14 +66,16 @@ namespace TrackMyWalks
                 TextColor = Color.Black,
                 Text = $"Poziom trudności: {walkItem.Difficulty} "
             };
+            trailDifficultyLabel.SetBinding(Label.TextProperty, "WalkEntry.Difficulty", stringFormat: "Poziom trudności: {0}");
 
-            var trialFullDiscription = new Label()
+            var trialFullDescription = new Label()
             {
                 FontSize = 11,
                 TextColor = Color.Black,
                 Text = $"{walkItem.Notes}",
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
+            trialFullDescription.SetBinding(Label.TextProperty, "WalkEntry.Notes");
 
             this.Content = new ScrollView
             {
@@ -81,7 +90,7 @@ namespace TrackMyWalks
                         trailNameLabel,
                         trailKilometersLabel,
                         trailDifficultyLabel,
-                        trialFullDiscription,
+                        trialFullDescription,
                         beginTrailWalk
 
                     }

@@ -5,7 +5,7 @@ using System.Text;
 
 using Xamarin.Forms;
 using TrackMyWalks.Models;
-
+using TrackMyWalks.ViewModels;
 
 namespace TrackMyWalks
 {
