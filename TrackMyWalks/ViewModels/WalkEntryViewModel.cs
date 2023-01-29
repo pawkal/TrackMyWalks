@@ -4,6 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using TrackMyWalks.Models;
 using Xamarin.Forms;
+using TrackMyWalks.ViewModels;
 
 namespace TrackMyWalks.ViewModels
 {
@@ -108,13 +109,13 @@ namespace TrackMyWalks.ViewModels
         {
             var newWalkItem = new WalkEntries
             {
-                Title = this.Title,
-                Notes = this.Notes,
-                Latitude = this.Latitude,
-                Longitude = this.Longitude,
-                Kilometers = this.Kilometers,
-                Difficulty = this.Difficulty,
-                Distance = this.Distance,
+                Title = this.title,
+                Notes = this.notes,
+                Latitude = this.latitude,
+                Longitude = this.longitude,
+                Kilometers = this.kilometers,
+                Difficulty = this.difficulty,
+                Distance = this.distance,
                 ImageUrl = this.ImageURL,
             };
 
